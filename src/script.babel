@@ -1,0 +1,168 @@
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: "",
+      answer: "",
+      display: "0"
+    };
+    this.showDisplay = this.showDisplay.bind(this);
+    this.reset = this.reset.bind(this);
+    this.calculate = this.calculate.bind(this);
+    this.handleDecimal = this.handleDecimal.bind(this);
+    this.handleOperand = this.handleOperand.bind(this);
+  }
+
+  showDisplay(event) {
+    event.preventDefault();
+    if (this.state.display == "0") {
+      this.setState({
+        display: event.target.value
+      });
+    } else {
+      this.setState({
+        display: this.state.display + event.target.value
+      });
+    }
+  }
+
+  handleDecimal(event) {
+    event.preventDefault();
+    if (event.target.value == ".") {
+      this.setState({
+        display: this.state.display + event.target.value
+      });
+      event.currentTarget.disabled = true;
+    } else if (this.state.display == "0" && event.target.value == ".") {
+      this.setState({
+        display: this.state.display + event.target.value
+      });
+      event.currentTarget.disabled = true;
+    }
+  }
+
+  handleOperand(event) {
+    this.setState({
+      display: this.state.display + event.target.value
+    });
+    document.getElementById("decimal").disabled = false;
+  }
+
+  calculate() {
+    try {
+      this.setState({
+        // eslint-disable-next-line
+        display: eval(this.state.display) //|| "") + ""
+      });
+    } catch (e) {
+      this.setState({
+        display: "error"
+      });
+    }
+  }
+
+  reset() {
+    this.setState({
+      display: 0
+    });
+    document.querySelector("#decimal").disabled = false;
+  }
+
+  render() {
+    return (
+      <div id="calc">
+        <div id="calc-output">
+          <input type="text" id="display" disabled value={this.state.display} />
+        </div>
+        <div id="buttons">
+          <button id="clear" onClick={this.reset}>
+            AC
+          </button>
+          <button
+            id="divide"
+            className="operator"
+            value="/"
+            onClick={this.handleOperand}
+          >
+            /
+          </button>
+          <button
+            id="multiply"
+            className="operator"
+            value="*"
+            onClick={this.handleOperand}
+          >
+            *
+          </button>
+
+          <br />
+
+          <button id="seven" value="7" onClick={this.showDisplay}>
+            7
+          </button>
+
+          <button id="eight" value="8" onClick={this.showDisplay}>
+            8
+          </button>
+          <button id="nine" value="9" onClick={this.showDisplay}>
+            9
+          </button>
+          <button
+            id="subtract"
+            className="operator"
+            value="-"
+            onClick={this.handleOperand}
+          >
+            -
+          </button>
+
+          <br />
+
+          <button id="four" value="4" onClick={this.showDisplay}>
+            4
+          </button>
+          <button id="five" value="5" onClick={this.showDisplay}>
+            5
+          </button>
+          <button id="six" value="6" onClick={this.showDisplay}>
+            6
+          </button>
+          <button
+            id="add"
+            className="operator"
+            value="+"
+            onClick={this.handleOperand}
+          >
+            +
+          </button>
+
+          <br />
+
+          <button id="one" value="1" onClick={this.showDisplay}>
+            1
+          </button>
+          <button id="two" value="2" onClick={this.showDisplay}>
+            2
+          </button>
+          <button id="three" value="3" onClick={this.showDisplay}>
+            3
+          </button>
+          <button id="decimal" value="." onClick={this.handleDecimal}>
+            .
+          </button>
+
+          <br />
+
+          <button id="zero" value="0" onClick={this.showDisplay}>
+            0
+          </button>
+          <button id="equals" value="=" onClick={this.calculate}>
+            =
+          </button>
+        </div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Calculator />, document.getElementById("root"));

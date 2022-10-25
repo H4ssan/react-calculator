@@ -1,0 +1,55 @@
+button {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid white;
+  width: 25%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 0px;
+  font-weight: bold;
+  font-size: 20px;
+  height: 70px;
+  transition-duration: 0.4s;
+}
+
+#zero,
+#equals,
+#clear {
+  width: 50% !important;
+}
+
+body {
+  background-color: lightblue;
+}
+
+#calc {
+}
+
+#buttons {
+  border: 3px solid white;
+  width: 20%;
+  margin: auto;
+  background-color: lightgrey;
+}
+
+button:hover {
+  background-color: lightgrey;
+}
+#calc-output {
+  background-color: black;
+  width: 20%;
+  padding-bottom: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin: auto;
+  border: 3px solid white;
+}
+
+input[type="text"] {
+  background-color: transparent;
+  text-align: end;
+  width: 100%;
+  color: #7b7a7d;
+  border: 0px;
+  font-size: 3rem;
+}
